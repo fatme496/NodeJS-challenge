@@ -129,6 +129,9 @@ function remove(text){
     Array.pop();
   }
   else{
+    if(Number(tab[1])>=Array.length){
+      return console.log("You entered a number that does not exist:)");
+    }
     for(let i=0; i<Array.length ; i++){
       if(i == Number(tab[1])){
         Array.splice(i-1,1);
