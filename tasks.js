@@ -75,7 +75,6 @@ function hello(text){
 
 /**
  * Exits the application
- *
  * @returns {void}
  */
 function quit(){
