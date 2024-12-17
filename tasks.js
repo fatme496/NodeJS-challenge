@@ -57,6 +57,9 @@ function onDataReceived(text) {
   else if(text.split(" ")[0] === 'remove'){
     remove(text);
   }
+  else if(text.split(" ")[0] === 'edit'){
+    edit(text);
+  }
   else{
     unknownCommand(text);
   }
@@ -140,6 +143,27 @@ function remove(text){
     }
   }
 }
-
+/**
+ * 
+ * Edit a task
+ */
+function edit(text){
+  let arr=text.split(" ");
+  if(arr.length == 1){
+    console.log("Error message: Specify your new text to edit a task:)");
+  }
+  else if(!isNaN(Number(arr[1]))){
+    for(let i=0; i<arr.length ;i++){
+      if(i == Number(arr[1])){
+        Array.splice(i-1,1,text.substring(7));
+        break;
+      }
+    }
+  }
+  else{
+    Array.pop();
+    Array.push(text.substring(5));
+  }
+}
 // The following line starts the application
 startApp("Fatme Said")
