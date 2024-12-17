@@ -45,6 +45,15 @@ function onDataReceived(text) {
   else if(text === 'help'){
     help();
   }
+  else if(text === 'list'){
+    list(Array);
+  }
+  else if(text.split(" ")[0] === 'add' && text.split(" ").length == 1){
+    console.log("Error message: You should add a task");
+  }
+  else if(text.split(" ")[0] === 'add'){
+    add(text.replace("add",""));
+  }
   else{
     unknownCommand(text);
   }
@@ -74,6 +83,7 @@ function hello(text){
 
 
 /**
+ * 
  * Exits the application
  * @returns {void}
  */
@@ -89,6 +99,22 @@ function quit(){
 function help(){
    console.log('All possible commands: \nhello\nquit\nexit\nunknownCommand\n');
 }
-
+/**
+ * 
+ * Lists all tasks
+ */
+function list(Array){
+  for(let i = 0; i< Array.length ; i++){
+    console.log((i+1)+" - [ ] "+ Array[i])
+  }
+}
+let Array=[];
+/**
+ * 
+ * Add a task
+ */
+function add(text){
+  Array.push(text);
+}
 // The following line starts the application
 startApp("Fatme Said")
