@@ -49,7 +49,7 @@ function onDataReceived(text) {
     list(Array);
   }
   else if(text.split(" ")[0] === 'add' && text.split(" ").length == 1){
-    console.log("Error message: You should add a task");
+    console.log("Error message: You should add a task :)");
   }
   else if(text.split(" ")[0] === 'add'){
     add(text.replace("add",""));
@@ -101,7 +101,7 @@ function help(){
 }
 /**
  * 
- * Lists all tasks
+ * Lists all tasks added
  */
 function list(Array){
   for(let i = 0; i< Array.length ; i++){
