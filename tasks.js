@@ -54,6 +54,9 @@ function onDataReceived(text) {
   else if(text.split(" ")[0] === 'add'){
     add(text.replace("add",""));
   }
+  else if(text.split(" ")[0] === 'remove'){
+    remove(text);
+  }
   else{
     unknownCommand(text);
   }
@@ -116,5 +119,24 @@ let Array=[];
 function add(text){
   Array.push(text);
 }
+/**
+ * 
+ * Remove elements from the list of tasks
+ */
+function remove(text){
+  let tab = text.split(" ");
+  if(tab.length == 1){
+    Array.pop();
+  }
+  else{
+    for(let i=0; i<Array.length ; i++){
+      if(i == Number(tab[1])){
+        Array.splice(i-1,1);
+        break;
+      }
+    }
+  }
+}
+
 // The following line starts the application
 startApp("Fatme Said")
