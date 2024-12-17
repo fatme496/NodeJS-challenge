@@ -82,6 +82,7 @@ function quit(){
 }
 
 /**
+ * 
  * Lists all the possible commands
  */
 function help(){
