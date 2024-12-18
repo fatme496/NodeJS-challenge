@@ -111,7 +111,15 @@ function help(){
  */
 function list(Array){
   for(let i = 0; i< Array.length ; i++){
-    console.log((i+1)+" - [ ] "+ Array[i])
+    let msg = (i+1)+" - [";
+    if(Array[i][1] == "true"){
+       msg+="✓";
+    }
+    else{
+       msg+=" ";
+    }
+    msg+="] "+ Array[i][0];
+    console.log(msg);
   }
 }
 let Array=[];
@@ -120,7 +128,7 @@ let Array=[];
  * Add a task
  */
 function add(text){
-  Array.push(text);
+  Array.push([text,"true"]);
 }
 /**
  * 
