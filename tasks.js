@@ -48,11 +48,8 @@ function onDataReceived(text) {
   else if(text === 'list'){
     list(Array);
   }
-  else if(text.split(" ")[0] === 'add' && text.split(" ").length == 1){
-    console.log("Error message: You should add a task :)");
-  }
   else if(text.split(" ")[0] === 'add'){
-    add(text.replace("add",""));
+    add(text);
   }
   else if(text.split(" ")[0] === 'remove'){
     remove(text);
@@ -134,7 +131,12 @@ let Array=[];
  * Add a task
  */
 function add(text){
-  Array.push([text,"false"]);
+  if(text.split(" ").length == 1){
+    console.log("Error message: You should add a task :)")
+  }else{
+    text = text.replace("add ","")
+    Array.push([text,"false"]);
+  }
 }
 /**
  * 
@@ -145,10 +147,10 @@ function remove(text){
   if(tab.length == 1){
     Array.pop();
   }
-  else{
-    if(Number(tab[1])>=Array.length){
+  else if(Number(tab[1])>Array.length){
       return console.log("You entered a number that does not exist:)");
-    }
+  }
+  else{
     for(let i=0; i<Array.length ; i++){
       if(i+1 == Number(tab[1])){
         Array.splice(i,1);
@@ -166,16 +168,19 @@ function edit(text){
   if(arr.length == 1){
     console.log("Error message: Specify your new text to edit a task:)");
   }
+  else if(Number(arr[1])>Array.length){
+    return console.log("You entered a number that does not exist:)");
+  }
   else if(!isNaN(Number(arr[1]))){
-    for(let i=0; i<Array.length ;i++){
+    for(let i=0; i<Array.length  ;i++){
       if(i+1 == Number(arr[1])){
-        Array[i].splice(0,1,arr[2]);
+        Array[i].splice(0,1,text.substring(text.indexOf(" ",5)).trim());
         break;
       }
     }
   }
   else{
-    Array[Array.length -1].splice(0,1,arr[1]);
+    Array[Array.length -1].splice(0,1,text.substring(text.indexOf(" ",5)).trim());
   }
 }
 /**
@@ -183,13 +188,19 @@ function edit(text){
  * Check tasks
  */
 function check(text){
-  if(text.split(" ").length == 1){
+  let tab = text.split(" ");
+  if(tab.length == 1){
     console.log("Error message: You should mention which task you want to check:)")
-  }else{
+  }
+  else if(Number(tab[1])>Array.length){
+    return console.log("You entered a number that does not exist:)");
+  }
+  else{
     let num=Number(text.split(" ")[1]);
     for(let i in Array){
       if(num-1 == i){
-        Array[i][1]== "true";
+        Array[i][1]= "true";
+        console.log("task "+ num +" is marked as checked :)")
         break;
       }
     }
@@ -200,13 +211,19 @@ function check(text){
  * Uncheck tasks
  */
 function uncheck(text){
-  if(text.split(" ").length == 1){
+  let tab = text.split(" ");
+  if(tab.length == 1){
     console.log("Error message: You should mention which task you want to uncheck:)")
-  }else{
+  }
+  else if(Number(tab[1])>Array.length){
+    return console.log("You entered a number that does not exist:)");
+  }
+  else{
     let num=Number(text.split(" ")[1]);
     for(let i in Array){
       if(num-1 == i){
-        Array[i][1]== "false";
+        Array[i][1]= "false";
+        console.log("task "+ num +" is marked as unchecked :)")
         break;
       }
     }
