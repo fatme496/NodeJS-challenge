@@ -109,7 +109,7 @@ function quit(){
  * Lists all the possible commands
  */
 function help(){
-   console.log('All possible commands: \nhello\nquit\nexit\nlist\nadd\nremove\nunknownCommand\n');
+   console.log('All possible commands: \nhello\nquit\nexit\nlist\nadd\nremove\nedit\ncheck\nuncheck\nunknownCommand\n');
 }
 /**
  * 
