@@ -60,6 +60,12 @@ function onDataReceived(text) {
   else if(text.split(" ")[0] === 'edit'){
     edit(text);
   }
+  else if(text.split(" ")[0] === 'check'){
+    check(text);
+  }
+  else if(text.split(" ")[0] === 'uncheck'){
+    uncheck(text);
+  }
   else{
     unknownCommand(text);
   }
@@ -128,7 +134,7 @@ let Array=[];
  * Add a task
  */
 function add(text){
-  Array.push([text,"true"]);
+  Array.push([text,"false"]);
 }
 /**
  * 
@@ -144,8 +150,8 @@ function remove(text){
       return console.log("You entered a number that does not exist:)");
     }
     for(let i=0; i<Array.length ; i++){
-      if(i == Number(tab[1])){
-        Array.splice(i-1,1);
+      if(i+1 == Number(tab[1])){
+        Array.splice(i,1);
         break;
       }
     }
@@ -161,16 +167,49 @@ function edit(text){
     console.log("Error message: Specify your new text to edit a task:)");
   }
   else if(!isNaN(Number(arr[1]))){
-    for(let i=0; i<arr.length ;i++){
-      if(i == Number(arr[1])){
-        Array.splice(i-1,1,text.substring(7));
+    for(let i=0; i<Array.length ;i++){
+      if(i+1 == Number(arr[1])){
+        Array[i].splice(0,1,arr[2]);
         break;
       }
     }
   }
   else{
-    Array.pop();
-    Array.push(text.substring(5));
+    Array[Array.length -1].splice(0,1,arr[1]);
+  }
+}
+/**
+ * 
+ * Check tasks
+ */
+function check(text){
+  if(text.split(" ").length == 1){
+    console.log("Error message: You should mention which task you want to check:)")
+  }else{
+    let num=Number(text.split(" ")[1]);
+    for(let i in Array){
+      if(num-1 == i){
+        Array[i][1]== "true";
+        break;
+      }
+    }
+  }
+}
+/**
+ * 
+ * Uncheck tasks
+ */
+function uncheck(text){
+  if(text.split(" ").length == 1){
+    console.log("Error message: You should mention which task you want to uncheck:)")
+  }else{
+    let num=Number(text.split(" ")[1]);
+    for(let i in Array){
+      if(num-1 == i){
+        Array[i][1]== "false";
+        break;
+      }
+    }
   }
 }
 // The following line starts the application
